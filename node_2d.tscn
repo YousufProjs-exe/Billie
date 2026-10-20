@@ -299,14 +299,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wo5et"]
+size = Vector2(163, 177)
+
 [node name="Node2D" type="Node2D" unique_id=724718360]
 script = ExtResource("1_0e48y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1692657715]
-position = Vector2(105, 75)
+position = Vector2(96.00001, 96)
+scale = Vector2(0.7421875, 0.78515625)
 sprite_frames = SubResource("SpriteFrames_q3343")
 animation = &"walk"
+frame_progress = 0.5092798
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1019710658]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=253105772]
+position = Vector2(108.5, 111.5)
+shape = SubResource("RectangleShape2D_wo5et")

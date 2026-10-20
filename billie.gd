@@ -35,20 +35,22 @@ func maybe_idle():
 func _on_area_input(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
-			var tween = create_tween()
-			tween.tween_property(animated_sprite, "offset:y", -30.0, 0.15)
-			tween.parallel().tween_property(animated_sprite, "scale", Vector2(1.15, 0.85), 0.15)
-			tween.tween_property(animated_sprite, "offset:y", 0.0, 0.15)
-			tween.parallel().tween_property(animated_sprite, "scale", Vector2(1.0, 1.0), 0.15)
-			
-			is_dragging = true
-			var mouse_pos = Vector2(DisplayServer.mouse_get_position())
-			var win_pos = Vector2(DisplayServer.window_get_position())
-			drag_offset = mouse_pos - win_pos
-		else:
-			is_dragging = false
+			if is_sitting:
+				is_sitting = false
+				is_idling = false
+				speed = 300.0
+				animated_sprite.play("walk")
+			else:
+				is_sitting = true
+				is_idling = false
+				speed = 0.0
+				animated_sprite.stop()
 
 func _physics_process(delta: float) -> void:
+	
+	if is_sitting:
+		return
+		
 	if is_dragging:
 		var mouse_pos = Vector2(DisplayServer.mouse_get_position())
 		var new_win_pos = mouse_pos - drag_offset
@@ -96,4 +98,3 @@ func _physics_process(delta: float) -> void:
 		direction.y = -1.0
 	
 	DisplayServer.window_set_position(Vector2i(window_position))
-	
