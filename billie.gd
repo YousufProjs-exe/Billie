@@ -33,18 +33,24 @@ func maybe_idle():
 		animated_sprite.play("turn_around")
 
 func _on_area_input(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			if is_sitting:
-				is_sitting = false
-				is_idling = false
-				speed = 300.0
-				animated_sprite.play("walk")
-			else:
-				is_sitting = true
-				is_idling = false
-				speed = 0.0
-				animated_sprite.stop()
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if event.double_click:
+			is_idling = false
+			is_sitting = false
+			speed = 0.0
+			animated_sprite.play("meow")
+			return
+
+		if is_sitting:
+			is_sitting = false
+			is_idling = false
+			speed = 300.0
+			animated_sprite.play("walk")
+		else:
+			is_sitting = true
+			is_idling = false
+			speed = 0.0
+			animated_sprite.stop()
 
 func _physics_process(delta: float) -> void:
 	
