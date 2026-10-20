@@ -23,12 +23,19 @@ func maybe_idle():
 		idle_timer = randf_range(1.0, 3.0)
 		var r = randi() % 3 
 		if r == 0:
-			animated_sprite.play("idle")
+			animated_sprite.play("meow")
 			speed = 0 
 
 func _on_area_input(_viewport, event, _shape_idx):
+	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT: 
 		if event.pressed:
+			var tween = create_tween()
+			tween.tween_property($AnimatedSprite2D, "offset:y", -30.0, 0.15)
+			tween.tween_property($AnimatedSprite2D, "offset:y", 0.0, 0.15)
+			tween.parallel().tween_property(animated_sprite, "scale", Vector2(1.15, 0.85), 0.15)
+			tween.tween_property(animated_sprite, "scale", Vector2(1.0, 1.0), 0.1)
+			
 			is_dragging = true 
 			var mouse_pos = Vector2(DisplayServer.mouse_get_position())
 			var win_pos = Vector2(DisplayServer.window_get_position())
