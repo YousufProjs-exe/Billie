@@ -2,10 +2,10 @@
 Desktop Pet ! - Billie the cat :) 
 
 Billie is a small desktop cat built with Godot. She lives on your desktop, walks around the screen, takes breaks, and reacts(meow) when you interact with her. The idea is to make her feel like a little companion instead of just another app running in the background.
-![Try Billie](https://itch.io/18ANANA/billie) ~for windows
-<p align="center"> 
- <img src="assets/billie" alt="Billie desktop cat">
-</p>
+
+[Try Billie](https://itch.io/18ANANA/billie) ~for windows
+
+![](https://github.com/Yousufprojs-exe/Billie/assest/billie.jpg) ~for windows
 
 ## Features
 
