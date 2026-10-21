@@ -5,7 +5,7 @@ Billie is a small desktop cat built with Godot. She lives on your desktop, walks
 
 [Try Billie](https://itch.io/18ANANA/billie) ~for windows
 
-![](https://github.com/Yousufprojs-exe/Billie/assest/billie.jpg) ~for windows
+![Billie](assest/billie.png)
 
 ## Features
 
