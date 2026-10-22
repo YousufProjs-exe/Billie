@@ -2,7 +2,8 @@
 extends Node2D
 
 var speed = 300.0
-var direction = Vector2(1, 0)
+#var direction = Vector2(1, 0)
+var direction = 1.0 
 var screen_size = Vector2.ZERO
 var window_size = Vector2(200, 200)
 var idle_timer = 0.0
@@ -34,18 +35,20 @@ func maybe_idle():
 
 func _on_area_input(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		
 		if event.double_click:
 			is_idling = false
 			is_sitting = false
 			speed = 0.0
 			animated_sprite.play("meow")
 			return
-
+			
 		if is_sitting:
 			is_sitting = false
 			is_idling = false
 			speed = 300.0
 			animated_sprite.play("walk")
+			
 		else:
 			is_sitting = true
 			is_idling = false
@@ -53,54 +56,43 @@ func _on_area_input(_viewport, event, _shape_idx):
 			animated_sprite.stop()
 
 func _physics_process(delta: float) -> void:
-	
-	if is_sitting:
+	if is_dragging or is_sitting:
 		return
-		
-	if is_dragging:
-		var mouse_pos = Vector2(DisplayServer.mouse_get_position())
-		var new_win_pos = mouse_pos - drag_offset
-		DisplayServer.window_set_position(Vector2i(new_win_pos))
-		return
-		
+
 	if is_idling:
 		idle_timer -= delta
+		
 		if idle_timer <= 0.0:
 			is_idling = false
 			speed = 300.0
 			animated_sprite.play("walk")
 			idle_cooldown = randf_range(4.0, 8.0)
 		return
-		
+
 	idle_cooldown -= delta
 	if idle_cooldown <= 0.0:
 		maybe_idle()
 		if is_idling:
 			return
 		idle_cooldown = randf_range(4.0, 8.0)
-		
-	var window_position = Vector2(DisplayServer.window_get_position())
-	var max_x = maxf(0.0, screen_size.x - window_size.x)
-	var max_y = maxf(0.0, screen_size.y - window_size.y)
-	
-	window_position += direction * speed * delta
-	
+
+	var window_position := Vector2(DisplayServer.window_get_position())
+	var max_x := maxf(0.0, screen_size.x - window_size.x)
+	var bottom_y := maxf(0.0, screen_size.y - window_size.y)
+
+	window_position.y = bottom_y
+	window_position.x += direction * speed * delta
+
 	if window_position.x <= 0.0:
 		window_position.x = 0.0
-		direction.x = 1.0
+		direction = 1.0
 		animated_sprite.flip_h = false
 		maybe_idle()
+		
 	elif window_position.x >= max_x:
 		window_position.x = max_x
-		direction.x = -1.0
+		direction = -1.0
 		animated_sprite.flip_h = true
 		maybe_idle()
-		
-	if window_position.y <= 0.0:
-		window_position.y = 0.0
-		direction.y = 1.0
-	elif window_position.y >= max_y:
-		window_position.y = max_y
-		direction.y = -1.0
-	
-	DisplayServer.window_set_position(Vector2i(window_position))
+
+	DisplayServer.window_set_position(Vector2i(roundi(window_position.x), roundi(window_position.y)))
