@@ -95,22 +95,6 @@ region = Rect2(1536, 512, 256, 256)
 atlas = ExtResource("2_epypp")
 region = Rect2(1792, 512, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1fr6y"]
-atlas = ExtResource("2_epypp")
-region = Rect2(0, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2hxjc"]
-atlas = ExtResource("2_epypp")
-region = Rect2(256, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ebxd8"]
-atlas = ExtResource("2_epypp")
-region = Rect2(512, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2u7jv"]
-atlas = ExtResource("2_epypp")
-region = Rect2(768, 256, 256, 256)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_24dk6"]
 atlas = ExtResource("2_epypp")
 region = Rect2(0, 0, 256, 256)
@@ -118,10 +102,6 @@ region = Rect2(0, 0, 256, 256)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mryly"]
 atlas = ExtResource("2_epypp")
 region = Rect2(256, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kq1c5"]
-atlas = ExtResource("2_epypp")
-region = Rect2(512, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ornx7"]
 atlas = ExtResource("2_epypp")
@@ -131,33 +111,17 @@ region = Rect2(768, 0, 256, 256)
 atlas = ExtResource("2_epypp")
 region = Rect2(1024, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_540hr"]
-atlas = ExtResource("2_epypp")
-region = Rect2(1280, 0, 256, 256)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ip5v"]
 atlas = ExtResource("2_epypp")
 region = Rect2(1536, 0, 256, 256)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_540hr"]
+atlas = ExtResource("2_epypp")
+region = Rect2(1280, 0, 256, 256)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5dlx"]
 atlas = ExtResource("2_epypp")
 region = Rect2(1792, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c4wnb"]
-atlas = ExtResource("2_epypp")
-region = Rect2(0, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7plk7"]
-atlas = ExtResource("2_epypp")
-region = Rect2(256, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fbwgr"]
-atlas = ExtResource("2_epypp")
-region = Rect2(512, 256, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7mj2a"]
-atlas = ExtResource("2_epypp")
-region = Rect2(768, 256, 256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q3343"]
 animations = [{
@@ -247,25 +211,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1fr6y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2hxjc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ebxd8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2u7jv")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_24dk6")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mryly")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kq1c5")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ornx7")
@@ -274,25 +223,13 @@ animations = [{
 "texture": SubResource("AtlasTexture_cnnru")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_540hr")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_6ip5v")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_540hr")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_q5dlx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c4wnb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7plk7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fbwgr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7mj2a")
 }],
 "loop": 1,
 "name": &"walk",
@@ -306,14 +243,14 @@ size = Vector2(195.125, 175.25)
 script = ExtResource("1_0e48y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1692657715]
-position = Vector2(100.00001, 80)
-scale = Vector2(0.7832031, 0.7841796)
+position = Vector2(96, 77)
+scale = Vector2(0.8017579, 0.8100586)
 sprite_frames = SubResource("SpriteFrames_q3343")
 animation = &"walk"
-frame_progress = 0.37315214
+frame_progress = 0.017314428
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1019710658]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=253105772]
-position = Vector2(100, 95)
+position = Vector2(109, 102)
 shape = SubResource("RectangleShape2D_wo5et")

@@ -13,6 +13,9 @@ var is_dragging = false
 var drag_offset = Vector2.ZERO
 var is_sitting = false
 var is_turning = false
+var is_sleeping = false
+var sleep_timer = 0.0
+var sleep_cooldown = 20.0
 var tap_count = 0
 var idle_chance = 0.0
 
@@ -58,31 +61,51 @@ func _on_area_input(_viewport, event, _shape_idx):
 func _physics_process(delta: float) -> void:
 	if is_dragging or is_sitting:
 		return
-
-	if is_idling:
-		idle_timer -= delta
 		
-		if idle_timer <= 0.0:
-			is_idling = false
+	if is_sleeping:
+		sleep_timer -= delta
+		if sleep_timer <= 0.0:
+			is_sleeping = false
 			speed = 300.0
 			animated_sprite.play("walk")
 			idle_cooldown = randf_range(4.0, 8.0)
 		return
-
+		
+	if is_idling:
+		idle_timer -= delta
+		if idle_timer <= 0.0:
+			is_idling = false
+			
+			if sleep_cooldown <= 0.0 and randf() < 0.5:
+				is_sleeping = true
+				sleep_timer = randf_range(4.0, 8.0)
+				sleep_cooldown = randf_range(25.0, 40.0)
+				speed = 0.0
+				animated_sprite.play("sleep")
+				
+			else:
+				speed = 300.0
+				animated_sprite.play("walk")
+				
+			idle_cooldown = randf_range(4.0, 8.0)
+		return
+		
+	sleep_cooldown -= delta
+		
 	idle_cooldown -= delta
 	if idle_cooldown <= 0.0:
 		maybe_idle()
 		if is_idling:
 			return
 		idle_cooldown = randf_range(4.0, 8.0)
-
+		
 	var window_position := Vector2(DisplayServer.window_get_position())
 	var max_x := maxf(0.0, screen_size.x - window_size.x)
 	var bottom_y := maxf(0.0, screen_size.y - window_size.y - 15.0)
-
+	
 	window_position.y = bottom_y
 	window_position.x += direction * speed * delta
-
+	
 	if window_position.x <= 0.0:
 		window_position.x = 0.0
 		direction = 1.0
@@ -94,5 +117,5 @@ func _physics_process(delta: float) -> void:
 		direction = -1.0
 		animated_sprite.flip_h = true
 		maybe_idle()
-
+		
 	DisplayServer.window_set_position(Vector2i(roundi(window_position.x), roundi(window_position.y)))
