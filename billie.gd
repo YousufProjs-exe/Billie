@@ -78,7 +78,7 @@ func _physics_process(delta: float) -> void:
 
 	var window_position := Vector2(DisplayServer.window_get_position())
 	var max_x := maxf(0.0, screen_size.x - window_size.x)
-	var bottom_y := maxf(0.0, screen_size.y - window_size.y)
+	var bottom_y := maxf(0.0, screen_size.y - window_size.y - 50.0)
 
 	window_position.y = bottom_y
 	window_position.x += direction * speed * delta
