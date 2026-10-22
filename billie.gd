@@ -62,7 +62,7 @@ func handle_clicks():
 		#_on_animation_finished()
 	elif click_count == 2:
 		is_action_animation = true
-		action_timer = 1.5
+		action_timer = 2.5
 		animated_sprite.play("turn_around")
 	elif click_count >= 3:
 		is_sleeping = true
