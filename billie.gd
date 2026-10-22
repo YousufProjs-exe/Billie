@@ -76,7 +76,7 @@ func _physics_process(delta: float) -> void:
 		if idle_timer <= 0.0:
 			is_idling = false
 			
-			if sleep_cooldown <= 0.0 and randf() < 0.5:
+			if sleep_cooldown <= 0.0 and randf() < 0.8:
 				is_sleeping = true
 				sleep_timer = randf_range(4.0, 8.0)
 				sleep_cooldown = randf_range(25.0, 40.0)
@@ -90,7 +90,7 @@ func _physics_process(delta: float) -> void:
 			idle_cooldown = randf_range(4.0, 8.0)
 		return
 		
-	sleep_cooldown -= delta
+	sleep_cooldown -= delta * 3.0
 		
 	idle_cooldown -= delta
 	if idle_cooldown <= 0.0:
