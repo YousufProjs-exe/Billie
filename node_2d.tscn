@@ -233,7 +233,7 @@ position = Vector2(96, 77)
 scale = Vector2(0.8017579, 0.8100586)
 sprite_frames = SubResource("SpriteFrames_q3343")
 animation = &"meow"
-frame_progress = 0.32264093
+frame_progress = 0.07538069
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1019710658]
 
