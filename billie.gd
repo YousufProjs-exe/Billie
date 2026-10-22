@@ -1,6 +1,7 @@
 
 extends Node2D
 
+var action_timer = 0.0
 var speed = 300.0
 var direction = 1.0
 var screen_size = Vector2.ZERO
@@ -11,8 +12,6 @@ var is_idling = false
 var is_dragging = false
 var drag_offset = Vector2.ZERO
 var is_sleeping = false
-var sleep_timer = 0.0
-var sleep_cooldown = 20.0
 var is_action_animation = false
 var click_count = 0
 var click_timer = 0.0
@@ -26,46 +25,50 @@ func _ready():
 	screen_size = Vector2(DisplayServer.screen_get_size())
 	animated_sprite.play("walk")
 	area.input_event.connect(_on_area_input)
-	animated_sprite.animation_finished.connect(_on_animation_finished)
 	idle_cooldown = randf_range(4.0, 8.0)
 
 func maybe_idle():
-	if not is_idling and randf() < 0.3:
+	if not is_idling and not is_sleeping and not is_action_animation and randf() < 0.3:
 		is_idling = true
 		idle_timer = randf_range(2.0, 4.0)
+		action_timer = idle_timer
 		speed = 0.0
 		animated_sprite.play("turn_around")
 
 func _on_area_input(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if is_sleeping:
+			is_sleeping = false
+			speed = 300.0
+			animated_sprite.play("walk")
+			idle_cooldown = randf_range(4.0, 8.0)
+			click_count = 0
+			return
+			
 		click_count += 1
 		click_timer = click_delay
 
 func handle_clicks():
 	is_idling = false
-	is_sleeping = false
 	is_action_animation = false
+	is_sleeping = false
 	speed = 0.0
 	
 	if click_count == 1:
 		is_action_animation = true
+		action_timer = 1.0
 		animated_sprite.play("meow")
+		#animated_sprite.play("walk")
+		#_on_animation_finished()
 	elif click_count == 2:
-		is_sleeping = true
-		sleep_timer = randf_range(4.0, 8.0)
-		animated_sprite.play("sleep")
-	elif click_count >= 3:
 		is_action_animation = true
+		action_timer = 1.5
 		animated_sprite.play("turn_around")
+	elif click_count >= 3:
+		is_sleeping = true
+		animated_sprite.play("sleep")
 		
 	click_count = 0
-
-func _on_animation_finished():
-	if is_action_animation:
-		is_action_animation = false
-		is_idling = false
-		speed = 300.0
-		animated_sprite.play("walk")
 
 func _physics_process(delta: float) -> void:
 	if click_count > 0:
@@ -73,42 +76,26 @@ func _physics_process(delta: float) -> void:
 		if click_timer <= 0.0:
 			handle_clicks()
 			
-	if is_dragging:
-		return
-		
-	if is_sleeping:
-		sleep_timer -= delta
-		if sleep_timer <= 0.0:
-			is_sleeping = false
-			is_action_animation = false
-			is_idling = false
-			speed = 300.0
-			animated_sprite.play("walk")
-			idle_cooldown = randf_range(4.0, 8.0)
+	if is_dragging or is_sleeping:
 		return
 		
 	if is_action_animation:
+		action_timer -= delta
+		if action_timer <= 0.0:
+			is_action_animation = false
+			speed = 300.0
+			animated_sprite.play("walk")
 		return
 		
 	if is_idling:
 		idle_timer -= delta
 		if idle_timer <= 0.0:
 			is_idling = false
-			
-			if sleep_cooldown <= 0.0 and randf() < 0.8:
-				is_sleeping = true
-				sleep_timer = randf_range(4.0, 8.0)
-				sleep_cooldown = randf_range(25.0, 40.0)
-				speed = 0.0
-				animated_sprite.play("sleep")
-			else:
-				speed = 300.0
-				animated_sprite.play("walk")
-				
+			speed = 300.0
+			animated_sprite.play("walk")
 			idle_cooldown = randf_range(4.0, 8.0)
 		return
 		
-	sleep_cooldown -= delta * 3.0
 	idle_cooldown -= delta
 	
 	if idle_cooldown <= 0.0:
@@ -134,5 +121,5 @@ func _physics_process(delta: float) -> void:
 		direction = -1.0
 		animated_sprite.flip_h = true
 		maybe_idle()
-
+		
 	DisplayServer.window_set_position(Vector2i(roundi(window_position.x), roundi(window_position.y)))
