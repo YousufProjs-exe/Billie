@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://b6kswhuy033il" path="res://billie.png" id="2_0e48y"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wtcfe"]
-load_path = "res://.godot/imported/Billie.png-675ab0d2ff8a585da9dd831699356429.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0hol4"]
 atlas = SubResource("CompressedTexture2D_wtcfe")

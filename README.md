@@ -9,11 +9,15 @@ Billie is a small desktop cat built with Godot. She lives on your desktop, walks
 
 ## Features
 
+<video src="./billie.mp4" controls width="100%"></video>
+
+- **Pick Up** - Billie can be picked up ! 
 - **Desktop roaming** — Billie walks around the screen and changes direction at the edges.
 - **Idle animation** — she occasionally stops and plays her `turn_around` animation.
 - **Click interaction** — single-click to stop her or get her walking again.
-- **Meow** — double-click Billie to make her meow.
-- **Jump reaction** — a little jump animation when interacting with her.
+- **Meow** — single-click Billie to make her meow.
+- **Spins** - double-click Billie and she spins ! 
+- **Sleep** - triple click and she sleep (wakes up when disturbed).
 - **Pixel-art character** — animated using Godot's `AnimatedSprite2D`.
 
 ## Built with
