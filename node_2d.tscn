@@ -452,7 +452,7 @@ position = Vector2(88.19068, 84.036934)
 scale = Vector2(0.6874765, 0.7065307)
 sprite_frames = SubResource("SpriteFrames_q3343")
 animation = &"walk_1"
-frame_progress = 0.69442874
+frame_progress = 0.06596907
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1019710658]
 
