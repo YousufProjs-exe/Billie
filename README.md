@@ -13,7 +13,7 @@ Billie is a small desktop cat built with Godot. She lives on your desktop, walks
   <source src="https://raw.githubusercontent.com/YousufProjs-exe/Billie/main/billie.mp4" type="video/mp4">
   Your browser does not support video playback.
 </video>
-Watch this [Video](https://raw.githubusercontent.com/YousufProjs-exe/Billie/main/billie.mp4) if the video is not showing up! 
+Watch this ![Video](https://raw.githubusercontent.com/YousufProjs-exe/Billie/main/billie.mp4) if the video is not showing up! 
 
 - **Pick Up** - Billie can be picked up ! 
 - **Desktop roaming** — Billie walks around the screen and changes direction at the edges.
