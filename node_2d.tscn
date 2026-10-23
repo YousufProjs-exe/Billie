@@ -442,20 +442,20 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wo5et"]
-size = Vector2(195.125, 175.25)
+size = Vector2(158.78125, 145.8125)
 
 [node name="Node2D" type="Node2D" unique_id=724718360]
 script = ExtResource("1_0e48y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1692657715]
-position = Vector2(96, 77)
-scale = Vector2(0.8017579, 0.8100586)
+position = Vector2(88.19068, 84.036934)
+scale = Vector2(0.6874765, 0.7065307)
 sprite_frames = SubResource("SpriteFrames_q3343")
-animation = &"meow_1"
-frame_progress = 0.7547107
+animation = &"walk_1"
+frame_progress = 0.69442874
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1019710658]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=253105772]
-position = Vector2(98, 84)
+position = Vector2(100.609375, 87.09375)
 shape = SubResource("RectangleShape2D_wo5et")

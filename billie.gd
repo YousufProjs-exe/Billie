@@ -27,7 +27,7 @@ func _ready():
 	randomize()
 	screen_size = Vector2(DisplayServer.screen_get_size())
 	walk_y = maxf(0.0, screen_size.y - window_size.y - 15.0)
-	animated_sprite.play("walk")
+	animated_sprite.play("walk_1")
 	area.input_event.connect(_on_area_input)
 	idle_cooldown = randf_range(4.0, 8.0)
 	
@@ -38,7 +38,7 @@ func _on_area_input(_viewport, event, _shape_idx):
 				return
 			mouse_pressed_on_billie = true
 			hold_timer = 0.0
-			drag_offset = (Vector2(DisplayServer.window_get_position())- Vector2(DisplayServer.mouse_get_position()))
+			drag_offset = (Vector2(DisplayServer.window_get_position()) - Vector2(DisplayServer.mouse_get_position()))
 			
 func _input(event):
 	if event is InputEventMouseButton:
@@ -53,7 +53,7 @@ func _input(event):
 				is_action_animation = false
 				speed = 300.0
 				click_count = 0
-				animated_sprite.play("walk")
+				animated_sprite.play("walk_1")
 				idle_cooldown = randf_range(4.0, 8.0)
 				return
 			if mouse_pressed_on_billie:
@@ -62,7 +62,7 @@ func _input(event):
 					is_sleeping = false
 					speed = 300.0
 					click_count = 0
-					animated_sprite.play("walk")
+					animated_sprite.play("walk_1")
 					idle_cooldown = randf_range(4.0, 8.0)
 					return
 				click_count += 1
@@ -76,14 +76,14 @@ func handle_clicks():
 	if click_count == 1:
 		is_action_animation = true
 		action_timer = 1.0
-		animated_sprite.play("meow")
+		animated_sprite.play("meow_1")
 	elif click_count == 2:
 		is_action_animation = true
 		action_timer = 2.5
-		animated_sprite.play("turn_around")
+		animated_sprite.play("turn_around_1")
 	elif click_count >= 3:
 		is_sleeping = true
-		animated_sprite.play("sleep")
+		animated_sprite.play("sleep_1")
 	click_count = 0
 	
 func maybe_idle():
@@ -92,10 +92,9 @@ func maybe_idle():
 			is_idling = true
 			idle_timer = randf_range(2.0, 4.0)
 			speed = 0.0
-			animated_sprite.play("turn_around")
+			animated_sprite.play("turn_around_1")
 			
 func _physics_process(delta: float) -> void:
-	# Wait briefly to distinguish a click from a pickup.
 	if mouse_pressed_on_billie and not is_dragging:
 		hold_timer += delta
 		if hold_timer >= pickup_delay:
@@ -105,7 +104,7 @@ func _physics_process(delta: float) -> void:
 			is_action_animation = false
 			is_sleeping = false
 			speed = 0.0
-			animated_sprite.play("walk")
+			animated_sprite.play("walk_1")
 		return
 	if is_dragging:
 		var mouse_pos = Vector2(DisplayServer.mouse_get_position())
@@ -125,14 +124,14 @@ func _physics_process(delta: float) -> void:
 		if action_timer <= 0.0:
 			is_action_animation = false
 			speed = 300.0
-			animated_sprite.play("walk")
+			animated_sprite.play("walk_1")
 		return
 	if is_idling:
 		idle_timer -= delta
 		if idle_timer <= 0.0:
 			is_idling = false
 			speed = 300.0
-			animated_sprite.play("walk")
+			animated_sprite.play("walk_1")
 			idle_cooldown = randf_range(4.0, 8.0)
 		return
 	idle_cooldown -= delta
